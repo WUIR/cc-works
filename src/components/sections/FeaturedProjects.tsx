@@ -19,20 +19,12 @@ interface Project {
 
 const featuredProjects: Project[] = projectsData.featured;
 
-const containerVariants = {
-  hidden: {},
-  visible: {
-    transition: { staggerChildren: 0.15 },
-  },
-};
-
 const cardVariants = {
-  hidden: { opacity: 0, y: 40, scale: 0.95 },
+  hidden: { opacity: 0, y: 40 },
   visible: {
     opacity: 1,
     y: 0,
-    scale: 1,
-    transition: { duration: 0.5, type: "spring", stiffness: 120 },
+    transition: { duration: 0.6, type: "spring", stiffness: 100, damping: 20 },
   },
 };
 
@@ -40,7 +32,6 @@ function TiltCard({ children }: { children: React.ReactNode }) {
   const ref = useRef<HTMLDivElement>(null);
   const x = useMotionValue(0);
   const y = useMotionValue(0);
-
   const springX = useSpring(x, { stiffness: 200, damping: 20 });
   const springY = useSpring(y, { stiffness: 200, damping: 20 });
 
@@ -49,14 +40,10 @@ function TiltCard({ children }: { children: React.ReactNode }) {
     if (!rect) return;
     const px = (e.clientX - rect.left) / rect.width;
     const py = (e.clientY - rect.top) / rect.height;
-    x.set((px - 0.5) * 10);
-    y.set((py - 0.5) * -10);
+    x.set((px - 0.5) * 8);
+    y.set((py - 0.5) * -8);
   };
-
-  const handleLeave = () => {
-    x.set(0);
-    y.set(0);
-  };
+  const handleLeave = () => { x.set(0); y.set(0); };
 
   return (
     <motion.div
@@ -64,7 +51,7 @@ function TiltCard({ children }: { children: React.ReactNode }) {
       onMouseMove={handleMouse}
       onMouseLeave={handleLeave}
       style={{ rotateX: springY, rotateY: springX }}
-      className="overflow-hidden rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800"
+      className="overflow-hidden rounded-2xl bg-white/10 dark:bg-white/5 backdrop-blur-md border border-white/10 dark:border-white/10 shadow-lg hover:shadow-xl transition-shadow"
     >
       {children}
     </motion.div>
@@ -73,42 +60,37 @@ function TiltCard({ children }: { children: React.ReactNode }) {
 
 export function FeaturedProjects() {
   return (
-    <section className="py-20 relative">
-      {/* Subtle background line */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/2 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent" />
-      </div>
-
-      <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 relative">
-        {/* Section Header */}
+    <section className="py-24 relative">
+      <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="mb-12 text-center"
+          className="mb-14 text-center"
         >
-          <h2 className="text-3xl font-bold text-slate-900 dark:text-white sm:text-4xl">
-            精选项目
+          <h2 className="text-3xl font-bold">
+            <span className="bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
+              精选项目
+            </span>
           </h2>
-          <p className="mt-4 text-muted dark:text-slate-400">
+          <p className="mt-3 text-muted/80 dark:text-slate-400">
             我的一些代表性项目作品
           </p>
         </motion.div>
 
-        {/* Projects Grid */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 perspective-[1000px]"
-        >
-          {featuredProjects.map((project) => (
-            <motion.div key={project.id} variants={cardVariants} className="group">
+        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 perspective-[1000px]">
+          {featuredProjects.map((project, index) => (
+            <motion.div
+              key={project.id}
+              variants={cardVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ delay: index * 0.1 }}
+              className="group"
+            >
               <TiltCard>
-                {/* Cover Image */}
-                <div className="aspect-video relative overflow-hidden bg-gradient-to-br from-primary/20 to-secondary/20 dark:from-primary/10 dark:to-secondary/10">
+                <div className="aspect-video relative overflow-hidden">
                   {project.cover ? (
                     <Image
                       src={project.cover}
@@ -117,70 +99,57 @@ export function FeaturedProjects() {
                       className="object-cover transition-transform duration-500 group-hover:scale-110"
                     />
                   ) : (
-                    <div className="flex h-full w-full items-center justify-center text-4xl text-primary/50">
+                    <div className="flex h-full w-full items-center justify-center text-3xl text-primary/30">
                       📁
                     </div>
                   )}
-                  {/* Type Badge */}
                   {project.type && (
-                    <span className="absolute right-3 top-3 rounded-full bg-white/90 dark:bg-slate-800/90 px-2 py-1 text-xs font-medium text-slate-700 dark:text-slate-300 shadow-sm backdrop-blur-sm">
+                    <span className="absolute right-3 top-3 px-3 py-1 rounded-full text-xs font-medium bg-white/20 dark:bg-black/20 backdrop-blur-md text-white">
                       {project.type}
                     </span>
                   )}
-                  {/* Hover overlay */}
-                  <motion.div
-                    className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                 </div>
 
-                {/* Content */}
                 <div className="p-6">
-                  <motion.h3 className="mb-2 text-lg font-semibold text-slate-900 dark:text-white group-hover:text-primary transition-colors">
+                  <h3 className="mb-2 text-lg font-semibold text-slate-900 dark:text-white group-hover:text-primary transition-colors">
                     {project.title}
-                  </motion.h3>
-                  <p className="mb-4 text-sm text-muted dark:text-slate-400 line-clamp-2">
+                  </h3>
+                  <p className="mb-4 text-sm text-muted/80 dark:text-slate-400 line-clamp-2">
                     {project.description}
                   </p>
-
-                  {/* Tags */}
                   <div className="mb-4 flex flex-wrap gap-2">
                     {project.tags.map((tag) => (
-                      <motion.span
+                      <span
                         key={tag}
-                        whileHover={{ scale: 1.05 }}
-                        className="rounded-full bg-primary/10 px-2 py-1 text-xs font-medium text-primary dark:bg-primary/20 cursor-default"
+                        className="px-2.5 py-1 rounded-full text-xs font-medium bg-primary/10 dark:bg-primary/20 text-primary backdrop-blur-sm"
                       >
                         {tag}
-                      </motion.span>
+                      </span>
                     ))}
                   </div>
-
-                  {/* Links */}
                   <div className="flex items-center gap-4">
                     <motion.a
                       href={project.github}
                       whileHover={{ x: 3 }}
-                      className="flex items-center gap-1 text-sm text-muted hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors"
+                      className="flex items-center gap-1 text-sm text-muted/70 hover:text-slate-900 dark:hover:text-white transition-colors"
                     >
-                      <Globe className="h-4 w-4" />
-                      源码
+                      <Globe className="h-4 w-4" /> 源码
                     </motion.a>
                     <motion.a
                       href={project.demo}
                       whileHover={{ x: 3 }}
-                      className="flex items-center gap-1 text-sm text-muted hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors"
+                      className="flex items-center gap-1 text-sm text-muted/70 hover:text-slate-900 dark:hover:text-white transition-colors"
                     >
-                      <ExternalLink className="h-4 w-4" />
-                      演示
+                      <ExternalLink className="h-4 w-4" /> 演示
                     </motion.a>
                   </div>
                 </div>
               </TiltCard>
             </motion.div>
           ))}
-        </motion.div>
+        </div>
 
-        {/* View All Link */}
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
@@ -190,7 +159,7 @@ export function FeaturedProjects() {
           <motion.a
             href="/projects"
             whileHover={{ x: 5 }}
-            className="inline-flex items-center gap-2 text-primary hover:underline"
+            className="inline-flex items-center gap-2 text-primary/80 hover:text-primary transition-colors"
           >
             查看所有项目
             <ExternalLink className="h-4 w-4" />
