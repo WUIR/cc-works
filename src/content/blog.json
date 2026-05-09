@@ -1,0 +1,34 @@
+[
+  {
+    "slug": "python-decorator-guide",
+    "title": "Python 装饰器完全指南",
+    "date": "2026-04-15",
+    "tags": ["Python", "基础"],
+    "excerpt": "装饰器是 Python 中最 powerful 的特性之一。本文从基础到进阶，带你彻底理解装饰器的工作原理与应用场景。",
+    "content": "## 什么是装饰器？\n\n装饰器（Decorator）是 Python 中一种强大的工具，它允许你在不修改原函数代码的情况下，动态地给函数添加功能。\n\n## 基础概念\n\nPython 中的函数是一等公民（first-class citizen），这意味着函数可以像变量一样被传递、赋值和返回。\n\n```python\ndef greet(name):\n    return f\"Hello, {name}!\"\n\n# 函数可以赋值给变量\nsay_hello = greet\nprint(say_hello(\"Desola\"))  # Hello, Desola!\n```\n\n## 简单的装饰器\n\n```python\ndef logger(func):\n    def wrapper(*args, **kwargs):\n        print(f\"Calling {func.__name__}\")\n        result = func(*args, **kwargs)\n        print(f\"Finished {func.__name__}\")\n        return result\n    return wrapper\n\n@logger\ndef add(a, b):\n    return a + b\n\nprint(add(1, 2))\n# Calling add\n# Finished add\n# 3\n```\n\n## 带参数的装饰器\n\n```python\ndef repeat(n):\n    def decorator(func):\n        def wrapper(*args, **kwargs):\n            for _ in range(n):\n                result = func(*args, **kwargs)\n            return result\n        return wrapper\n    return decorator\n\n@repeat(3)\ndef say(message):\n    print(message)\n\nsay(\"Hello!\")\n# Hello!\n# Hello!\n# Hello!\n```\n\n## 实际应用场景\n\n1. **日志记录**：自动记录函数调用信息\n2. **性能计时**：测量函数执行时间\n3. **权限校验**：检查用户是否有权执行操作\n4. **缓存结果**：functools.lru_cache\n5. **重试机制**：自动重试失败的操作\n\n## 总结\n\n装饰器让代码更优雅、更 DRY。掌握它能让你的 Python 水平提升一个台阶。"
+  },
+  {
+    "slug": "fastapi-intro",
+    "title": "FastAPI 快速上手与实战",
+    "date": "2026-03-20",
+    "tags": ["FastAPI", "Python", "Web"],
+    "excerpt": "FastAPI 是 Python 生态中最受欢迎的现代 Web 框架之一。本文带你从零开始构建一个完整的 API 服务。",
+    "content": "## 为什么选择 FastAPI？\n\nFastAPI 是一个现代、高性能的 Python Web 框架，基于 Starlette 和 Pydantic 构建。\n\n### 核心优势\n\n- **高性能**：与 Node.js 和 Go 相当的性能\n- **自动文档**：自动生成 Swagger UI 和 ReDoc\n- **类型安全**：基于 Pydantic 的类型验证\n- **异步支持**：原生 async/await 支持\n\n## 快速开始\n\n```python\nfrom fastapi import FastAPI\n\napp = FastAPI()\n\n@app.get(\"/\")\ndef read_root():\n    return {\"Hello\": \"World\"}\n```\n\n启动服务：\n\n```bash\nuvicorn main:app --reload\n```\n\n访问 `http://localhost:8000/docs` 即可看到自动生成的 API 文档。\n\n## 路径参数与查询参数\n\n```python\n@app.get(\"/items/{item_id}\")\ndef read_item(item_id: int, q: str = None):\n    return {\"item_id\": item_id, \"q\": q}\n```\n\n## 请求体\n\n```python\nfrom pydantic import BaseModel\n\nclass Item(BaseModel):\n    name: str\n    price: float\n    is_offer: bool = False\n\n@app.post(\"/items/\")\ndef create_item(item: Item):\n    return item\n```\n\n## 与 MCP 结合\n\nFastAPI + MCP（Model Context Protocol）可以实现强大的 AI Agent 工具链。\n\nMCP 工具的优势在于：\n\n1. **标准化协议**：统一的工具调用接口\n2. **类型安全**：严格的参数类型验证\n3. **远程调用**：支持分布式工具服务\n\n## 总结\n\nFastAPI 是现代 Python Web 开发的首选框架，结合类型提示和自动文档，能让开发效率大幅提升。"
+  },
+  {
+    "slug": "pyqt6-desktop-app",
+    "title": "PyQt6 桌面应用开发实践",
+    "date": "2026-02-10",
+    "tags": ["PyQt6", "Python", "桌面"],
+    "excerpt": "使用 PyQt6 开发跨平台桌面应用的实践经验总结，包括 MVC 架构设计、多线程处理和打包部署。",
+    "content": "## PyQt6 简介\n\nPyQt6 是 Qt6 框架的 Python 绑定，用于开发跨平台桌面应用程序。\n\n## MVC 架构设计\n\n```python\n# Model - 数据层\nclass DataModel:\n    def __init__(self):\n        self.items = []\n    \n    def add_item(self, item):\n        self.items.append(item)\n    \n    def get_items(self):\n        return self.items\n\n# View - 视图层\nclass MainWindow(QMainWindow):\n    def __init__(self):\n        super().__init__()\n        self.model = DataModel()\n        self.controller = Controller(self.model, self)\n        self.init_ui()\n```\n\n## 多线程处理\n\n使用 QThread 避免 UI 阻塞：\n\n```python\nclass Worker(QThread):\n    finished = pyqtSignal(object)\n    \n    def __init__(self, fn, *args, **kwargs):\n        super().__init__()\n        self.fn = fn\n        self.args = args\n        self.kwargs = kwargs\n    \n    def run(self):\n        result = self.fn(*self.args, **self.kwargs)\n        self.finished.emit(result)\n```\n\n## 打包部署\n\n使用 PyInstaller 打包为单文件：\n\n```bash\npyinstaller --onefile --windowed main.py\n```\n\n## 实践建议\n\n1. **使用信号槽**：组件间通信的最佳方式\n2. **QSS 样式**：类似 CSS 的 UI 美化方式\n3. **资源文件**：使用 qrc 管理图标和资源\n4. **国际化**：tr() 函数支持多语言"
+  },
+  {
+    "slug": "ai-agent-mcp",
+    "title": "构建 AI Agent：从 LangChain 到 MCP",
+    "date": "2026-01-05",
+    "tags": ["AI", "LangChain", "MCP", "Python"],
+    "excerpt": "探索如何利用 LangChain 和 MCP 协议构建智能 AI Agent，从工具调用到多服务器扩展的完整实践。",
+    "content": "## 什么是 AI Agent？\n\nAI Agent 是能够自主理解和执行任务的智能体，它不只是简单对话，而是能调用工具、处理信息、完成复杂工作流。\n\n## LangChain Agent 基础\n\n```python\nfrom langchain.agents import create_agent\nfrom langchain.tools import tool\n\n@tool\ndef search(query: str) -> str:\n    \"\"\"搜索互联网信息\"\"\"\n    return f\"Search results for: {query}\"\n\nagent = create_agent(\n    tools=[search],\n    llm=llm,\n    prompt=\"You are a helpful assistant...\"\n)\n```\n\n## MCP 协议介绍\n\nMCP（Model Context Protocol）是 AI 模型与外部工具交互的标准化协议。\n\n### 核心概念\n\n1. **Tool**：可被 AI 调用的外部功能\n2. **Server**：提供工具的远程服务\n3. **Client**：消费工具的 AI Agent\n4. **Context**：工具执行的上下文信息\n\n### MultiServerMCPClient\n\n```python\nfrom mcp import MultiServerMCPClient\n\nasync with MultiServerMCPClient() as client:\n    # 连接多个 MCP 服务器\n    await client.connect(\"server1\", \"http://localhost:8000\")\n    await client.connect(\"server2\", \"http://localhost:8001\")\n    \n    # 获取所有工具\n    tools = client.get_tools()\n    \n    # 使用工具\n    result = await tools[0].call({\"query\": \"Hello\"})\n```\n\n## 实际应用\n\n在数据分析智能助手项目中，我们使用了：\n\n1. **本地工具**：文件处理、数据查询\n2. **远程 MCP 工具**：联网搜索、API 调用\n3. **流式对话**：Streamlit 实时展示\n\n## 未来展望\n\nMCP 协议正在快速发展，未来将支持更丰富的工具类型和更高效的通信机制。"
+  }
+]
