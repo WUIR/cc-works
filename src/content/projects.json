@@ -1,0 +1,35 @@
+{
+  "featured": [
+    {
+      "id": 1,
+      "title": "博客社区系统",
+      "description": "基于 Django + MySQL + Markdown 的前后端不分离 web 项目，类似 CSDN 的博客社区，支持 Markdown 编辑、多维度检索、AJAX 点赞收藏等功能。",
+      "tags": ["Django", "MySQL", "Markdown", "Python"],
+      "cover": "/images/projects/blog-cover.svg",
+      "github": "#",
+      "demo": "#",
+      "type": "个人项目"
+    },
+    {
+      "id": 2,
+      "title": "数据分析智能助手",
+      "description": "基于 UniApp + FastAPI 构建的智能对话 Agent 平台，前端跨平台应用，后端接入 Qwen 大模型，支持 MCP 工具扩展、联网搜索、流式对话。",
+      "tags": ["UniApp", "FastAPI", "LangChain", "MCP"],
+      "cover": "/images/projects/agent-cover.svg",
+      "github": "#",
+      "demo": "#",
+      "type": "实习项目"
+    },
+    {
+      "id": 3,
+      "title": "支部活动管理系统",
+      "description": "基于 Python3.12 + PyQt6 的桌面应用，实现学生信息管理、活动记录追踪、出勤统计、数据导入导出、AI 总结等功能，已应用于实际工作场景。",
+      "tags": ["PyQt6", "SQLite", "OpenAI", "Python"],
+      "cover": "/images/projects/party-cover.svg",
+      "github": "#",
+      "demo": "#",
+      "type": "个人项目"
+    }
+  ],
+  "all": []
+}

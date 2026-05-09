@@ -16,8 +16,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "ccWorks | 个人作品集",
-  description: "前端工程师 & 全栈开发者的个人作品集网站",
+  title: "Desola | 个人作品集",
+  description: "Python工程师 & AI使用爱好者的个人作品集网站",
 };
 
 export default function RootLayout({

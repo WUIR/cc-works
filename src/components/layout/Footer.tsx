@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { Globe, AtSign } from "lucide-react";
 
 const socialLinks = [
