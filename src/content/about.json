@@ -1,0 +1,41 @@
+{
+  "name": "Desola",
+  "title": "Python工程师 | AI使用爱好者",
+  "bio": "热爱 Python 和人工智能，热衷于用代码解决实际问题。从桌面应用到智能 Agent，不断探索技术在真实场景中的落地可能。",
+  "avatar": "/images/avatar/head.jpg",
+  "timeline": [
+    {
+      "year": "2026.03 - 2026.04",
+      "title": "数据分析智能助手",
+      "subtitle": "实习项目",
+      "description": "基于 UniApp + FastAPI 构建智能对话 Agent 平台，前端跨平台，后端接入 Qwen 大模型，支持 MCP 工具扩展。",
+      "tags": ["UniApp", "FastAPI", "LangChain", "MCP"]
+    },
+    {
+      "year": "2025.12 - 2026.03",
+      "title": "支部活动管理系统",
+      "subtitle": "个人项目",
+      "description": "基于 PyQt6 + SQLite 开发的桌面应用，实现学生信息管理、活动追踪、AI 总结等功能，已应用于实际工作场景。",
+      "tags": ["PyQt6", "SQLite", "OpenAI", "Python"]
+    },
+    {
+      "year": "2025.09 - 2025.12",
+      "title": "博客社区系统",
+      "subtitle": "个人项目",
+      "description": "基于 Django + MySQL 的全栈博客社区，支持 Markdown 编辑、多维度全文检索、AJAX 点赞收藏等功能。",
+      "tags": ["Django", "MySQL", "Markdown", "Python"]
+    },
+    {
+      "year": "2025.06 - 2025.09",
+      "title": "Python 学习与实践",
+      "subtitle": "自学阶段",
+      "description": "系统学习 Python 编程，掌握 Web 开发、桌面应用、数据处理等技术栈，完成多个实战项目。",
+      "tags": ["Python", "基础", "实战"]
+    }
+  ],
+  "highlights": [
+    { "label": "项目经验", "value": "3+", "desc": "已完成项目" },
+    { "label": "学习时长", "value": "1年+", "desc": "Python 技术栈" },
+    { "label": "技术领域", "value": "全栈", "desc": "桌面/Web/AI Agent" }
+  ]
+}
