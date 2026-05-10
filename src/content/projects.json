@@ -29,6 +29,16 @@
       "github": "#",
       "demo": "#",
       "type": "个人项目"
+    },
+    {
+      "id": 4,
+      "title": "docx-cleaner",
+      "description": "基于 Python 的命令行工具，用于清理和规范化 Word 文档 (.docx)，支持批量处理、格式清洗、内容提取等功能。已发布至 PyPI。",
+      "tags": ["Python", "CLI", "PyPI", "自动化"],
+      "cover": "/images/projects/docx-cleaner-cover.svg",
+      "github": "https://github.com/WUIR/docx-cleaner",
+      "demo": "https://pypi.org/project/docx-cleaner/0.1.0/",
+      "type": "开源项目"
     }
   ],
   "all": [
@@ -61,6 +71,16 @@
       "github": "#",
       "demo": "#",
       "type": "个人项目"
+    },
+    {
+      "id": 4,
+      "title": "docx-cleaner",
+      "description": "基于 Python 的命令行工具，用于清理和规范化 Word 文档 (.docx)，支持批量处理、格式清洗、内容提取等功能。已发布至 PyPI。",
+      "tags": ["Python", "CLI", "PyPI", "自动化"],
+      "cover": "/images/projects/docx-cleaner-cover.svg",
+      "github": "https://github.com/WUIR/docx-cleaner",
+      "demo": "https://pypi.org/project/docx-cleaner/0.1.0/",
+      "type": "开源项目"
     }
   ]
 }
