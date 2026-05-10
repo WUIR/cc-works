@@ -36,8 +36,8 @@ function TiltCard({ children }: { children: React.ReactNode }) {
   const springY = useSpring(y, { stiffness: 200, damping: 20 });
 
   const handleMouse = (e: React.MouseEvent) => {
-    const rect = ref.current?.getBoundingClientRect();
-    if (!rect) return;
+    if (!ref.current) return;
+    const rect = ref.current.getBoundingClientRect();
     const px = (e.clientX - rect.left) / rect.width;
     const py = (e.clientY - rect.top) / rect.height;
     x.set((px - 0.5) * 8);

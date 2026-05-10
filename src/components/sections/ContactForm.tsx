@@ -2,7 +2,7 @@
 
 import { useState, type FormEvent } from "react";
 import { motion } from "framer-motion";
-import { Send, Loader2, CheckCircle, AlertCircle, Mail, MapPin, Github } from "lucide-react";
+import { Send, Loader2, CheckCircle, AlertCircle, Mail, MapPin, Globe } from "lucide-react";
 
 interface FormData {
   name: string;
@@ -214,7 +214,7 @@ export function ContactForm() {
             rel="noopener noreferrer"
             className="flex items-center gap-3 text-sm text-muted/80 dark:text-slate-400 hover:text-primary transition-colors"
           >
-            <Github className="w-4 h-4 text-primary" />
+            <Globe className="w-4 h-4 text-primary" />
             github.com/desola
           </a>
         </div>
