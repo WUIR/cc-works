@@ -15,8 +15,8 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const siteUrl = "https://desola.vercel.app";
-const siteName = "Desola | 个人作品集";
+const siteUrl = "https://ccworks-site-6frg85merr.edgeone.app";
+const siteName = "ccWorks | Desola 个人作品集";
 
 export const viewport: Viewport = {
   themeColor: [

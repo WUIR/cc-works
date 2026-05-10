@@ -1,7 +1,9 @@
 import type { MetadataRoute } from "next";
 
+export const dynamic = "force-static";
+
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://desola.vercel.app";
+  const baseUrl = "https://ccworks-site-6frg85merr.edgeone.app";
 
   const routes = [
     { path: "", priority: 1.0, changeFrequency: "monthly" as const },
